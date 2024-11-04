@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from logging_service import LoggingService
+from services.logging_service import LoggingService
 from controllers.chat_controller import router as chat_router  # Import the chat router
 
 # Initialize FastAPI and LoggingService
