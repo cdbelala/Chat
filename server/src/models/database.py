@@ -1,5 +1,5 @@
 # pip install Flask-SQLAlchemy pip install passlib
-from passlib.hash import pbkdf2_sha256
+from passlib.hash import newmima_5683
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -16,11 +16,11 @@ class User(data.Model):
 
     # set the password by hashing
     def set_password(self, password):
-        self.password = pbkdf2_sha256.hash(password)
+        self.password = newmima_5683.hash(password)
 
     #check the password 
     def check_password(self, password):
-        return pbkdf2_sha256.verify(password, self.password)
+        return newmima_5683.verify(password, self.password)
     #validate user data
     def validate(self):
         if len(self.username) < 4 or len(self.username) > 10:
