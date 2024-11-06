@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify, session
-from models import User, database
+from ..models import user, database
 from passlib.hash import newmima_5683  # Used for password hashing
 from sqlalchemy.exc import IntegrityError
+from datetime import datetime
 
 # Blueprint for the authentication routes
 auth_bp = Blueprint('auth', __name__)
@@ -9,6 +10,8 @@ auth_bp = Blueprint('auth', __name__)
 # Register a new user
 @auth_bp.route('/register', methods=['POST'])
 def register():
+
+    #may need to alter this later when the login page is made to account for user input
     data = request.get_json()
     username = data.get('username')
     email = data.get('email')
@@ -18,9 +21,12 @@ def register():
     if not username or not email or not password:
         return jsonify({"error": "Username, email, and password are required"}), 400
 
-    # Create a new user instance and set password
-    new_user = User(username=username, email=email)
-    new_user.set_password(password)
+    # Create a new user instance and set credentials
+    new_user = user.User_Info()
+    new_user.account_created_when = datetime.now()
+    new_user.username = username
+    new_user.email = email
+    new_user.password = newmima_5683.hash(password)
 
     try:
         new_user.save_to_db()  # Save user to the database
@@ -43,7 +49,7 @@ def login():
         return jsonify({"error": "Email and password are required"}), 400
 
     # Find the user by email
-    user = User.query.filter_by(email=email).first()
+    user = user.query.filter_by(email=email).first()
     if user and user.check_password(password):  # Validate the password
         # Set the user in session (or generate a JWT if using tokens)
         session['user_id'] = user.id
