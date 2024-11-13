@@ -3,6 +3,7 @@ from ..models import user, database
 from passlib.hash import newmima_5683  # Used for password hashing
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
+from fastapi import exception_handlers
 
 # Blueprint for the authentication routes
 auth_bp = Blueprint('auth', __name__)
@@ -26,6 +27,7 @@ def register():
     new_user.account_created_when = datetime.now()
     new_user.username = username
     new_user.email = email
+    #need to retrieve unique user id as well
     new_user.password = newmima_5683.hash(password)
 
     try:
