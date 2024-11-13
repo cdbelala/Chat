@@ -1,0 +1,45 @@
+/* Full-screen blue background with centered content */
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Large, white title centered at the top */
+.home-title {
+    font-size: 3rem;
+    margin-bottom: 50px;
+    color: white;
+}
+
+/* Centered navigation buttons with some spacing */
+.home-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20vh; /* Positions buttons roughly halfway down the page */
+}
+
+/* Styling for buttons to look consistent and stand out */
+.nav-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #007bff;
+    background-color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+}
+
+.nav-button:hover {
+    background-color: #0056b3; /* Darkens background on hover */
+    color: white; /* Text color changes to white on hover */
+}

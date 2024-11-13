@@ -1,5 +1,5 @@
 from contextlib import nullcontext
-from firebase import firebase as fb
+from firebase_admin import auth, firestore
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 from passlib.hash import bcrypt  # Password hashing library

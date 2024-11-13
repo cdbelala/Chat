@@ -1,0 +1,82 @@
+/* Full-screen background with centered profile container */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #007bff;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Title styling */
+.profile-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Form container */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  width: 300px;
+}
+
+/* Label styling */
+.profile-label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input field styling */
+.profile-input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  margin-top: 5px;
+  background-color: #333;
+  color: white;
+}
+
+/* Save button styling */
+.save-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.save-button:hover {
+  background-color: #003f7f;
+}
+
+/* Home button at the bottom */
+.home-button {
+  margin-top: 20px;
+  color: #007bff;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
+  color: white;
+}

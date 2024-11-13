@@ -1,0 +1,79 @@
+/* Main chatroom layout */
+.chatroom {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 20%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Chat area layout */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f4f4f9;
+}
+
+/* Chat room title */
+.chat-area h2 {
+    margin-bottom: 10px;
+}
+
+/* Chat log styling */
+.chat-log {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Individual message styling */
+.message {
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #e9e9f0;
+}
+
+/* Message input container styling */
+.message-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Message input field */
+.message-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Send button styling */
+.send-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.send-button:hover {
+    background-color: #0056b3;
+}
