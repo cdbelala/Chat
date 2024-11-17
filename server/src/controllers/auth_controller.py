@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session
 from ..models import user, database
-from passlib.hash import newmima_5683  # Used for password hashing
+from passlib.hash import bcrypt  # Used for password hashing
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
 from fastapi import exception_handlers
@@ -28,7 +28,7 @@ def register():
     new_user.username = username
     new_user.email = email
     #need to retrieve unique user id as well
-    new_user.password = newmima_5683.hash(password)
+    new_user.password = bcrypt.hash(password)
 
     try:
         new_user.save_to_db()  # Save user to the database
