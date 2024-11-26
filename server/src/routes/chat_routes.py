@@ -2,8 +2,7 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Query
 from typing import List, Optional
 import logging
 from services.logging_service import LoggingService
-from ..models import User, database
-
+from ..models import user, database
 
 # Initialize router and logging service
 router = APIRouter()
@@ -41,6 +40,7 @@ manager = ConnectionManager()
 async def chat_endpoint(
     websocket: WebSocket,
     username: Optional[str] = Query(None),  # Username to identify users
+    data = ""
 ):
     if not username:
         await websocket.close()
