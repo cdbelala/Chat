@@ -34,14 +34,20 @@ def register():
     #need to retrieve unique user id as well
     new_user.password = bcrypt.hash(password)
 
-    try:
-        new_user.save_to_db()  # Save user to the database
-        return jsonify({"message": "User registered successfully"}), 201
-    except IntegrityError:
-        database.session.rollback()
-        return jsonify({"error": "Username or email already exists"}), 409
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
+try:
+    # Attempt to save the new user to the database
+    new_user.save_to_db()
+    return jsonify({"message": "User registered successfully"}), 201
+
+except IntegrityError:
+    # Handle duplicate username or email entries
+    database.session.rollback()
+    return jsonify({"error": "Username or email already exists"}), 409
+
+except ValueError as error:
+    # Handle other ValueError exceptions
+    return jsonify({"error": str(error)}), 400
+
 
 # Hardcoded credentials
 HARDCODED_USERNAME = "admin"
