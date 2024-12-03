@@ -1,14 +1,41 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 
 function Profile() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate=useNavigate();
 
-  const handleSave = () => {
-    alert('Profile saved!');
-  };
+  const handleSave = async() => {
+    if (!username || !password)
+    {
+      alert('Please enter valid username and password!');
+      return;
+    }
+    try{
+      const response = await fetch('/api/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    });
+    if (response.ok) {
+    alert('Profile created successfully!');
+    navigate ('/login');
+    }
+    else{
+      const errorData = await response.json();
+      alert(`Error: ${errorData.message}`);
+
+    }
+  } catch (error){
+    console.error('Error during profile creation', error);
+    alert('An error occurred');
+  }
+};
 
   return (
     <div className="profile-container">

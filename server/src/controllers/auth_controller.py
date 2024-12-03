@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, session
+from flask_cors import CORS
 from ..models import user, database
 from passlib.hash import bcrypt  # Used for password hashing
 from sqlalchemy.exc import IntegrityError
@@ -7,6 +8,9 @@ from fastapi import exception_handlers
 
 # Blueprint for the authentication routes
 auth_bp = Blueprint('auth', __name__)
+
+#enable cors
+CORS(auth_bp, origins=["http://localhost:3000"])  # Allow React (running on port 3000) to access your Flask API
 
 # Register a new user
 @auth_bp.route('/register', methods=['POST'])
@@ -38,6 +42,10 @@ def register():
         return jsonify({"error": "Username or email already exists"}), 409
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+# Hardcoded credentials
+HARDCODED_USERNAME = "admin"
+HARDCODED_PASSWORD = "My_pass563"
 
 # Login a user
 @auth_bp.route('/login', methods=['POST'])

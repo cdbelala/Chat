@@ -1,0 +1,76 @@
+/* Login container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Heading styling */
+h2 {
+    font-size: 2rem;
+    color: #fffefe;
+    margin-bottom: 30px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgb(242, 238, 238);
+}
+
+/* Input fields styling */
+input[type="username"], input[type="password"] {
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="username"]:focus, input[type="password"]:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styling for focus */
+button[type="submit"]:focus {
+    outline: none;
+}

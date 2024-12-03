@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from .auth_routes import router as auth_router
 from fastapi.responses import JSONResponse
 from services.logging_service import LoggingService
 from controllers.chat_controller import router as chat_router  # Import the chat router
@@ -6,6 +7,8 @@ from controllers.chat_controller import router as chat_router  # Import the chat
 # Initialize FastAPI and LoggingService
 app = FastAPI()
 logger = LoggingService()
+
+app.include_router(auth_router)
 
 # Middleware for logging requests and responses
 @app.middleware("http")
