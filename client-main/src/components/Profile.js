@@ -12,7 +12,7 @@ function Profile() {
     if (!username || !password)
     {
       alert('Please enter valid username and password!');
-      return;
+      return; // Checks to see if the usernames is correct followed by the password
     }
     try{
       const response = await fetch('/api/profile', {
