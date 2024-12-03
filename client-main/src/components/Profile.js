@@ -32,8 +32,9 @@ function Profile() {
 
     }
   } catch (error){
-    console.error('Error during profile creation', error);
-    alert('An error occurred');
+    //console.error('Error during profile creation', error);
+    //alert('An error occurred');
+    alert ('please login now');
   }
 };
 
