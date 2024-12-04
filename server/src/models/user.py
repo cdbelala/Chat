@@ -13,15 +13,16 @@ from ..controllers import auth_controller
 fa = FastAPI()
 db = firestore.client()
 
-validated = True
+#validated = True
 
 class User_Info:
-    can_send_messages = True
-    ID = 0
-    username = ""
-    email_address = ""
-    passwrd = ""
-    account_created_when = nullcontext
+    def __init__(self, ID, username, email_address, password, can_send_messages=True):
+        self.ID = ID
+        self.username = username
+        self.email_address = email_address
+        self.passwrd = bcrypt.hash(password)  # Hash the password
+        self.can_send_messages = can_send_messages
+        self.account_created_when = datetime.utcnow()
 
     #start user session
     def save_to_db(self):
@@ -31,7 +32,8 @@ class User_Info:
             'username': self.username,
             'email': self.email_address,
             'password': self.passwrd,
-            'can_send_messages': self.can_send_messages
+            'can_send_messages': self.can_send_messages,
+            'account_created_when': self.account_created_when.isoformat()
         })
 
     #kill user session
@@ -42,3 +44,6 @@ class User_Info:
     #check if user is signed in, mechanism to alter bool should be part of the auth_controller
     def signed_in(self, validated):
         if not validated: return False
+    
+    def validate_password(self, password):
+        return bcrypt.verify(password,self.passwrd)

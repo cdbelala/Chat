@@ -27,9 +27,11 @@ class User(data.Model):
             raise ValueError("Username must be between 4 and 10 characters long.")
         if '@' not in self.email:  # Basic email validation
             raise ValueError("Invalid email address.")
-        
-    def save_to_data(self): # Validate before saving
-        self.validate()  
+    #save user data to the database
+    def save_to_data(self):
+        self.validate()  # Validate before saving
+        if not self.password.startswith('$2b$'):  # Hash password if not already hashed
+            self.set_password(self.password)
         data.session.add(self)
         data.session.commit()
 

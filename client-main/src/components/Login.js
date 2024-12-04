@@ -10,6 +10,9 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log("Username:", username);
+        console.log("Password:", password);
         
         // Validate form data
         if (!username || !password) {

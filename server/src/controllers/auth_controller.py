@@ -25,28 +25,28 @@ def register():
     # Check if any fields are missing
     if not username or not email or not password:
         return jsonify({"error": "Username, email, and password are required"}), 400
-
+    
+    try:
     # Create a new user instance and set credentials
-    new_user = user.User_Info()
-    new_user.account_created_when = datetime.now()
-    new_user.username = username
-    new_user.email = email
-    #need to retrieve unique user id as well
-    new_user.password = bcrypt.hash(password)
+        new_user = user.User_Info()
+        new_user.account_created_when = datetime.now()
+        new_user.username = username
+        new_user.email = email
+        #need to retrieve unique user id as well
+        new_user.password = bcrypt.hash(password)
 
-try:
-    # Attempt to save the new user to the database
-    new_user.save_to_db()
-    return jsonify({"message": "User registered successfully"}), 201
+        # save the new user to the database
+        new_user.save_to_db()
+        return jsonify({"message": "User registered successfully"}), 201
 
-except IntegrityError:
+    except IntegrityError:
     # Handle duplicate username or email entries
-    database.session.rollback()
-    return jsonify({"error": "Username or email already exists"}), 409
+        database.session.rollback()
+        return jsonify({"error": "Username or email already exists"}), 409
 
-except ValueError as error:
-    # Handle other ValueError exceptions
-    return jsonify({"error": str(error)}), 400
+    except ValueError as error:
+        # Handle other ValueError exceptions
+        return jsonify({"error": str(error)}), 400
 
 
 # Hardcoded credentials
@@ -57,6 +57,7 @@ HARDCODED_PASSWORD = "My_pass563"
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()  # Get JSON data from the request
+
     email = data.get('email')
     password = data.get('password')
 
@@ -66,8 +67,9 @@ def login():
 
     # Find the user by email
     user = user.query.filter_by(email=email).first()
+
     if user and user.check_password(password):  # Validate the password
-        # Set the user in session (or generate a JWT if using tokens)
+        # Set the user in session
         session['user_id'] = user.id
         return jsonify({"message": "Login successful"}), 200
     else:
@@ -83,6 +85,7 @@ def logout():
 @auth_bp.route('/status', methods=['GET'])
 def status():
     user_id = session.get('user_id')
+    
     if user_id:
         return jsonify({"status": "Authenticated", "user_id": user_id}), 200
     else:

@@ -1,14 +1,15 @@
 from fastapi import FastAPI, Request
-from .auth_routes import router as auth_router
+from routes.auth_routes import router as auth_router
 from fastapi.responses import JSONResponse
 from services.logging_service import LoggingService
 from controllers.chat_controller import router as chat_router  # Import the chat router
-
+from middlewares.auth_middleware import AuthMiddleware
 # Initialize FastAPI and LoggingService
-app = FastAPI()
+app = FastAPI() 
 logger = LoggingService()
 
 app.include_router(auth_router)
+app.add_middleware(AuthMiddleware)
 
 # Middleware for logging requests and responses
 @app.middleware("http")
@@ -34,3 +35,7 @@ async def handle_exception(request: Request, exc: Exception):
 
 # Include the chat router to handle WebSocket connections
 app.include_router(chat_router)
+
+# Include routers
+app.include_router(auth_router, prefix="/auth")
+app.include_router(chat_router, prefix="/chat")
